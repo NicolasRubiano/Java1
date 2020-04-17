@@ -1,6 +1,8 @@
 package practica1;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -27,9 +29,10 @@ private LaminaBotones lamina_tipo,lamina_tipo_mensajes,lamina_mensaje,lamina_tip
 		lamina_cuadricula.add(lamina_opciones);
 		lamina_cuadricula.add(lamina_botones);
 		
-		//Constuimos la lamina inferior del boton
+		//Constuimos la lamina inferior del botonn
 		JPanel lamina_mostrar=new JPanel();
 		JButton boton_mostrar=new JButton("Mostrar");
+		boton_mostrar.addActionListener(new AccionMostrar());
 		lamina_mostrar.add(boton_mostrar);
 		add(lamina_mostrar, BorderLayout.SOUTH);
 		add(lamina_cuadricula,BorderLayout.CENTER);
@@ -37,6 +40,13 @@ private LaminaBotones lamina_tipo,lamina_tipo_mensajes,lamina_mensaje,lamina_tip
 		}
 	
 	
-	
+	private class AccionMostrar implements ActionListener{
+//ACCIOMN BOTON MOSTRAR
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println(lamina_tipo_mensajes.dameSeleccion());
+		}
+		
+	}
 	
 }
