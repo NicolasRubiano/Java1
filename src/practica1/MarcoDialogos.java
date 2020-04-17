@@ -11,7 +11,7 @@ private LaminaBotones lamina_tipo;
 		JPanel lamina_cuadricula=new JPanel();//Agregar lamina tipo float
 		lamina_cuadricula.setLayout(new GridLayout(2,3));//Cambiar lamina a tipo gridLayout
 		add(lamina_cuadricula);//Mostrar lamina
-		String primero[]= {"Mensaje5", "Confirmar","Opción","Entrada"};
+		String primero[]= {"Mensaje6", "Confirmar","Opción","Entrada"};
 		lamina_tipo=new LaminaBotones("Tipo", primero);
 		lamina_cuadricula.add(lamina_tipo);
 		add(lamina_cuadricula);
