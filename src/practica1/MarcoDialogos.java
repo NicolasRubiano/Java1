@@ -10,39 +10,43 @@ import javax.swing.*;
 
 public class MarcoDialogos extends JFrame{
 	//------------Variables---------
-private LaminaBotones lamina_tipo,lamina_tipo_mensajes,lamina_mensaje,lamina_tipo_opcion,lamina_opciones,lamina_entrada;
-private String cadenaMensaje="Mensaje";
-private Icon iconoMensaje=new ImageIcon("src/practica1/icono.gif");
-private Object objetoMensaje=new Date();
-private Component  componenteMensaje=new JButton();
+private LaminaBotones lamina_tipo,lamina_tipo_mensajes,lamina_mensaje,lamina_tipo_opcion,lamina_opciones,lamina_entrada;//Cada una de las 6 comboBox
+// TIPOS DE MENSAJES
+private String cadenaMensaje="Mensaje"; //El mensaje que aparece en el JOptionPane
+private Icon iconoMensaje=new ImageIcon("src/practica1/icono.gif");//El icono que aparece en el mensaje
+private Object objetoMensaje=new Date();// Tipo objeto es una fecha
+private Component  componenteMensaje=new JButton();//Tipo componente es un Boton 
 
 //------------------Constructor----------------------------------
 public MarcoDialogos() {
-		setTitle("Prueba de diálogos");
-		setBounds(500,200,600,450);
-		JPanel lamina_cuadricula=new JPanel();//Agregar lamina tipo float
-		lamina_cuadricula.setLayout(new GridLayout(2,3));//Cambiar lamina a tipo gridLayout
+		setTitle("Prueba de diálogos");// Se da un titulo a  ventana
+		setBounds(500,200,600,450);// Tamaño de la ventana y ubicacion
+		JPanel lamina_cuadricula=new JPanel();//Nuevo Panel
+		lamina_cuadricula.setLayout(new GridLayout(2,3));//Cambiar lamina a tipo gridLayout 3colomnas 2filas
 		add(lamina_cuadricula);//Mostrar lamina
-		String primero[]= {"Mensaje", "Confirmar","Opción","Entrada"};
-		lamina_tipo=new LaminaBotones("Tipo", primero);
+		String primero[]= {"Mensaje", "Confirmar","Opción","Entrada"};//Titulo de los radio buton
+		lamina_tipo=new LaminaBotones("Tipo", primero);//IR A CLASE LAMINA BOTONES pasa parametros
+		//TODO IGUAL QUE ANTES PERO MAS SIMPLIFICADO
 		lamina_tipo_mensajes=new LaminaBotones("Tipo de Mensaje",new String[]{"ERROR_MESSAGE", "INFORMATION_MESSAGE","WARNING_MESSAGE","QUESTION_MESSAGE","PLAIN__MESSAGE"});
 		lamina_mensaje=new LaminaBotones("Mensaje",new String[]{"Cadena", "Icono","Component","Otros","Object[]"});
 		lamina_tipo_opcion=new LaminaBotones("Confirmar",new String[]{"default_option", "Yes_No_option","Yes_No_Cancel","OK_Cancel"});
 		lamina_opciones=new LaminaBotones("Opcion",new String[]{"String[]","Icon[]","Object[]"});
 		lamina_entrada=new LaminaBotones("Entrada",new String[]{"Campo texto","ComboBox"});
-		setLayout(new BorderLayout());
+		//**--**
+		setLayout(new BorderLayout());//agregar un Borde 
+		//Agrega las laminas a la cuadricula laminas del tipo LaminaBotones
 		lamina_cuadricula.add(lamina_tipo);
 		lamina_cuadricula.add(lamina_tipo_mensajes);
 		lamina_cuadricula.add(lamina_mensaje);
 		lamina_cuadricula.add(lamina_tipo_opcion);
 		lamina_cuadricula.add(lamina_opciones);
 		lamina_cuadricula.add(lamina_entrada);
-		
+	
 		//Constuimos la lamina inferior del botonn
-		JPanel lamina_mostrar=new JPanel();
-		JButton boton_mostrar=new JButton("Mostrar");
-		boton_mostrar.addActionListener(new AccionMostrar());
-		lamina_mostrar.add(boton_mostrar);
+		JPanel lamina_mostrar=new JPanel();//Agraegamos panel
+		JButton boton_mostrar=new JButton("Mostrar");//Agregamos boton
+		boton_mostrar.addActionListener(new AccionMostrar());//se crea el evento bton_mostrar lo dispara al hacer click
+		lamina_mostrar.add(boton_mostrar);//muestra el boton en la lamina
 		add(lamina_mostrar, BorderLayout.SOUTH);
 		add(lamina_cuadricula,BorderLayout.CENTER);
 		
@@ -53,9 +57,12 @@ private class AccionMostrar implements ActionListener{
 //ACCIOMN BOTON MOSTRAR
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//System.out.println(lamina_tipo.dameSeleccion());
+			//Hace una accion diferente dependiendo de el BOX TIPO
 			if(lamina_tipo.dameSeleccion().equals("Mensaje")) {
+			//Tipo mensaje Parametros(Contexto, Metodo dame mensaje, titulo, )
 				JOptionPane.showMessageDialog(MarcoDialogos.this, dameMensaje(),"Titulo",dameTipo(lamina_tipo_mensajes));
+			
+			
 			}
 			
 			else if(lamina_tipo.dameSeleccion().equals("Confirmar")) {
