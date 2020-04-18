@@ -3,12 +3,21 @@ package practica1;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
+import java.util.Date;
 
 import javax.swing.*;
 
 public class MarcoDialogos extends JFrame{
+	
 private LaminaBotones lamina_tipo,lamina_tipo_mensajes,lamina_mensaje,lamina_tipo_opcion,lamina_opciones,lamina_botones;
-	public MarcoDialogos() {
+private String cadenaMensaje="Mensaje";
+private Icon iconoMensaje=new ImageIcon("src/practica1/icono.gif");
+private Object objetoMensaje=new Date();
+private Component  componenteMensaje=new JButton();
+
+
+public MarcoDialogos() {
 		setTitle("Prueba de diálogos");
 		setBounds(500,200,600,450);
 		JPanel lamina_cuadricula=new JPanel();//Agregar lamina tipo float
@@ -39,14 +48,69 @@ private LaminaBotones lamina_tipo,lamina_tipo_mensajes,lamina_mensaje,lamina_tip
 		
 		}
 	
-	
-	private class AccionMostrar implements ActionListener{
+	//------------------------------ PROPORCIONA EL MENSAJE---------------
+
+	public Object dameMensaje() {
+		String  s=lamina_mensaje.dameSeleccion();
+		if(s.equals("Cadena")) {
+			return cadenaMensaje; 
+		}
+		
+		else if(s.equals("Icono")) {
+			return iconoMensaje;
+		}
+		
+		
+		else if (s.equals("Component")) {
+			return componenteMensaje;
+			
+		}
+		
+		else if(s.equals("Otros")) {
+			return objetoMensaje;
+		}
+		
+		else if (s.equals("Object[]")) {
+			
+			return new Object[] {cadenaMensaje,iconoMensaje,componenteMensaje,objetoMensaje};
+		}
+		
+		else {
+			return null;
+		}
+		
+		
+	}
+
+
+//-----------------CLASE INTERNA GESTIONA BOTON MOSTRAR--------------------
+private class AccionMostrar implements ActionListener{
 //ACCIOMN BOTON MOSTRAR
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(lamina_tipo_mensajes.dameSeleccion());
+			//System.out.println(lamina_tipo.dameSeleccion());
+			if(lamina_tipo.dameSeleccion().equals("Mensaje")) {
+				JOptionPane.showMessageDialog(MarcoDialogos.this, dameMensaje(),"Titulo",0);
+			}
+			
+			else if(lamina_tipo.dameSeleccion().equals("Confirmar")) {
+				JOptionPane.showConfirmDialog(MarcoDialogos.this, dameMensaje(),"Titulo",0,0);
+			}
+			
+			else if (lamina_tipo.dameSeleccion().equals("Entrada")) {
+				JOptionPane.showInputDialog(MarcoDialogos.this, dameMensaje(),"Titulo",0);
+			}
+			
+			else if (lamina_tipo.dameSeleccion().equals("Opción")) {
+				JOptionPane.showOptionDialog(MarcoDialogos.this, dameMensaje(),"Titulo",0,0,null,null,null);
+			}
 		}
 		
 	}
 	
+	
+	
 }
+
+//--------------Dibujar lamina amarilla-------------------------------
+
